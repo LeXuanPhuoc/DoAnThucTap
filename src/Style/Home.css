@@ -1,0 +1,44 @@
+
+
+  .s1::before {
+    content: "";
+    position:absolute;
+    right: 0px;
+    top: 20px;
+    bottom: 85px;
+    background: #b41712;
+    border-radius: 279px 0 0 279px;
+    z-index: -1;
+    width: 620px;
+    height: 560px;
+  }
+  
+  *,
+  ::after,
+  ::before {
+    box-sizing: border-box;
+  }
+  
+  .s2{
+    position: absolute;
+    top: 30px;
+    left: 0;
+    z-index: -1;
+}
+  
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .baner {
+      width: 100%;
+    }
+  
+    .baner_item {
+      width: 100%;
+      height: auto;
+    }
+  
+
+  }
