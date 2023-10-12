@@ -28,7 +28,7 @@ function Header() {
             className="h-[44px] w-full min-w-[120px]"
           /></Link>
         </div>
-        <div className="flex flex-row items-center gap-[35px]">
+        <div className="flex flex-row items-center gap-[35px] ">
   <NavLink
     to="/tai-san-dau-gia"
     className="hover:text-[#b41712] font-medium text-[#333]"

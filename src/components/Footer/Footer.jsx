@@ -1,5 +1,6 @@
 import React from 'react'
 import logofooter from'../../assets/images/logo.png'
+import {Link} from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -8,9 +9,9 @@ const Footer = () => {
     <div class="b-black mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">
-              <a href="/" class="flex items-center">
+              <Link to="/" class="flex items-center">
                   <img src={logofooter} class="h-[70px] mr-3" alt=" Logo" />
-              </a>
+              </Link>
           </div>
           <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
