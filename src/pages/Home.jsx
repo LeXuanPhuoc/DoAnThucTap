@@ -54,8 +54,8 @@ useEffect(() =>{
 
 
 
-    <section className="Trending__product mt-2 bg-[#f9fafa] mb-5">
-        <Container c>
+    <section className="Trending__product mt-2 bg-[#f9fafa] pb-5">
+        <Container >
             <Row>
                 <Col lg="12 mt-5 mb-4 ml-[37px] flex justify-center">
                <span className='text-[#b41712] text-[30px]'>
