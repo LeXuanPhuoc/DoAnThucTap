@@ -9,11 +9,11 @@ import productImg08 from "../images/car8.jpg"
 
 
 
-
+const oneDay = 24 * 60 * 60 * 1000; // Number of milliseconds in one day;
 
 
 const products = [
-
+ 
     {
         id: "01", 
         productName: "Thanh lý xe siết nợ ",
@@ -21,6 +21,8 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
+        startTime:"10, 26, 2023 10:09:00",
+        endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
         description:
@@ -34,7 +36,8 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
-        Time:" 3 ngày",
+        startTime:"10, 24, 2023 09:03:00",
+        endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
         description:
@@ -48,6 +51,8 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
+        startTime:"10, 24, 2023 19:03:00",
+        endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
         description:
@@ -61,6 +66,8 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
+        startTime:"10, 24, 2023 10:03:00",
+        endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
         description:
@@ -74,6 +81,8 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
+        startTime:"10, 24, 2023 20:03:00",
+        endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
         description:
@@ -86,6 +95,8 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
+        startTime:"11, 24, 2023 09:03:00",
+        endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
         description:
@@ -97,6 +108,8 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
+        startTime:"12, 24, 2023 09:03:00",
+        endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
         description:
@@ -108,6 +121,8 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
+        startTime:"11, 24,2023 09:03:00",
+        endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
         description:
