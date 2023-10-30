@@ -21,7 +21,7 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
-        startTime:"10, 26, 2023 10:09:00",
+        startTime:"10, 30, 2023 20:10:00",
         endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
