@@ -124,13 +124,16 @@
 
 
 
+// // 1
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef  } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import products from '../assets/data/products';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const Auction = () => {
   const { id } = useParams();
@@ -138,15 +141,17 @@ const Auction = () => {
 
   const [product, setProduct] = useState(null);
   const [remainingTime, setRemainingTime] = useState(null);
-  const [currentPrice, setCurrentPrice] = useState(100);
-  const [bidAmount, setBidAmount] = useState(10);
+  const [currentPrice, setCurrentPrice] = useState(100000);
+  const [bidAmount, setBidAmount] = useState(5  );
   const [step, setStep] = useState(5);
+  const [bidList, setBidList] = useState([]);
+
 
   useEffect(() => {
     const foundProduct = products.find((item) => item.id === id);
     setProduct(foundProduct);
 
-    const startTime = new Date(foundProduct.startTime);
+   const startTime = new Date(foundProduct.startTime);
     const endTime = new Date(startTime.getTime() + 24 * 60 * 60 * 1000);
 
     const timer = setInterval(() => {
@@ -178,13 +183,22 @@ const Auction = () => {
   const handleBid = () => {
     const newPrice = currentPrice + bidAmount;
     setCurrentPrice(newPrice);
+
+    const newBid = {
+      price: newPrice,
+      bidder: 'Tên người dùng', // Thay 'Tên người dùng' bằng tên thực tế của người dùng
+      time: new Date().toLocaleString(),
+    };
+  
+    setBidList((prevBidList) => [...prevBidList, newBid]);
+  
   };
 
   if (!product) {
     return <div>Sản phẩm không tồn tại</div>;
   }
 
-  const { imgUrl, productName } = product;
+  const { imgUrl, productName,price } = product;
 
   return (
     <Container>
@@ -206,7 +220,12 @@ const Auction = () => {
       <Row>
         <Col lg="5">
           <img src={imgUrl} alt={productName} className="rounded-md" />
-          <h2 className="pt-3 pb-3 font-semibold">{productName}</h2>
+          <div>
+          <h3 className=" pt-3 pb-1 font-semibold">{productName}</h3>
+          <span className="">Giá khởi điểm:  {price} vnđ</span>
+
+          </div>
+          
         </Col>
         <Col lg="7">
           {remainingTime ? (
@@ -222,10 +241,11 @@ const Auction = () => {
               {/* Display auction end notification */}
             </div>
           )}
-           <div className="cart-auction">
+          <div className=' min-h-[346px] shadow-lg p-3 rounded flex gap-5 justify-center'>
+           <div className="cart-auction border-1 rounded p-5 text-center ">
       <h2>Cart Đấu giá</h2>
-      <p>Giá Đang Đấu: {currentPrice}</p>
-      <p>Bước Nhảy: {step}</p>
+      <p className='text-black'>Giá Đang Đấu: {currentPrice}</p>
+      <p className='text-black'>Bước Nhảy: {step}</p>
 
       <input
         type="number"
@@ -233,8 +253,23 @@ const Auction = () => {
         onChange={(e) => setBidAmount(Number(e.target.value))}
       />
 
-      <button onClick={handleBid}>Bid</button>
+      <button onClick={handleBid} className='p-3 bg-gradient-to-r from-red-600 to-gray-600 hover:from-gray-600 hover:to-red-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform transition-all duration-500 ease-in-out hover:scale-110 hover:brightness-110 hover:animate-pulse active:animate-bounce'>
+       Bid </button>
 
+     </div>
+     <div className='list-name border-1 rounded p-5  '>
+      <h2> danh sách đặt giá:</h2><hr/>
+
+      
+      <ul className=' max-h-[180px] overflow-y-auto' >
+    {bidList.map((bid, index) => (
+      <li key={index} className=' text-[15px]'>
+        Mức giá: {bid.price} | Người đấu giá: {bid.bidder} | Thời gian: {bid.time}
+      </li>
+    ))}
+  </ul>
+
+     </div>
      </div>
         </Col>
        
@@ -245,3 +280,9 @@ const Auction = () => {
 };
 
 export default Auction;
+
+
+
+
+
+
