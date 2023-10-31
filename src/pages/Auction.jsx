@@ -142,8 +142,8 @@ const Auction = () => {
   const [product, setProduct] = useState(null);
   const [remainingTime, setRemainingTime] = useState(null);
   const [currentPrice, setCurrentPrice] = useState(100000);
-  const [bidAmount, setBidAmount] = useState(5  );
-  const [step, setStep] = useState(5);
+  const [bidAmount, setBidAmount] = useState(50000 );
+  const [step, setStep] = useState(50000);
   const [bidList, setBidList] = useState([]);
 
 
@@ -244,7 +244,7 @@ const Auction = () => {
           <div className=' min-h-[346px] shadow-lg p-3 rounded flex gap-5 justify-center'>
            <div className="cart-auction border-1 rounded p-5 text-center ">
       <h2>Cart Đấu giá</h2>
-      <p className='text-black'>Giá Đang Đấu: {currentPrice}</p>
+      <p className='text-black'>Giá Đang Đấu: {currentPrice} </p>
       <p className='text-black'>Bước Nhảy: {step}</p>
 
       <input
@@ -257,7 +257,7 @@ const Auction = () => {
        Bid </button>
 
      </div>
-     <div className='list-name border-1 rounded p-5  '>
+     <div className='list-name border-1 rounded   '>
       <h2> danh sách đặt giá:</h2><hr/>
 
       
