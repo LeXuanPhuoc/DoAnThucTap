@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { authApp, firestoreApp } from '../config/firebase';
 
 export const AuthContext = createContext();
+
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -39,6 +40,7 @@ export const AuthProvider = ({ children }) => {
     return db.doc(auctionId).delete();
   };
 
+  // Khi người dùng thay đổi, cập nhật currentUser và loading
   useEffect(() => {
     const subscribe = authApp.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -48,11 +50,13 @@ export const AuthProvider = ({ children }) => {
     return subscribe;
   }, []);
 
+  // Xóa thông báo toàn cầu sau 5 giây
   useEffect(() => {
     const interval = setTimeout(() => setGlobalMsg(''), 5000);
     return () => clearTimeout(interval);
   }, [globalMsg]);
 
+  // Xuất khẩu AuthContext.Provider để cung cấp giá trị và chức năng cho các thành phần con
   return (
     <AuthContext.Provider
       value={{

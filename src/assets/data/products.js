@@ -21,7 +21,7 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
-        startTime:"10, 30, 2023 20:10:00",
+        startTime:"10,31, 2023 16:46:00",
         endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
@@ -36,7 +36,7 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
-        startTime:"10, 24, 2023 09:03:00",
+        startTime:"10,31, 2023 11:00:00",
         endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",
@@ -51,7 +51,7 @@ const products = [
         category: "car", 
         price: 100000000,
         Status:"Xe  mới 99%",
-        startTime:"10, 24, 2023 19:03:00",
+        startTime:"10,31, 2023 11:11:00",
         endTime:`${oneDay}`,
         shortDesc:
           "một sản phẩm đáng chú ý với nhiều tính năng và ưu điểm hấp dẫn.được thiết kế để mang lại trải nghiệm tuyệt vời và đáp ứng nhu cầu của người dùng.",

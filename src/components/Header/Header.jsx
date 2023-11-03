@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useContext, useEffect } from 'react';
+
 import logo from '../../assets/images/logo.png';
 import { Link, NavLink } from 'react-router-dom';
 import { NavComp } from '../../pages/Navcomp';
+import AuctionForm from '../../pages/AuctionForm';
+
+import {AuthContext} from '../../context/AuthContext';
 
 function Header() {
   const [currentDateTime, setCurrentDateTime] = useState('');
+
+
+  const [auction, setAuction] = useState(null);
+  const { currentUser, globalMsg } = useContext(AuthContext);
+
 
   useEffect(() => {
     // Lấy thời gian hiện tại và định dạng ngày tháng
@@ -44,13 +53,13 @@ function Header() {
   >
     Cuộc đấu giá
   </NavLink>
-  <NavLink
-    to="/auctionform"
-    className="hover:text-[#b41712] font-medium text-[#333]"
+  <span
+    className="hover:text-[#b41712] font-medium text-[#333] cursor-pointer	"
     activeClassName="text-[#b41712]"
   >
-    Tạo phiên đấu giá
-  </NavLink>
+
+{currentUser && <AuctionForm setAuction={setAuction} />}
+  </span>
   <NavLink
     to="/gioi-thieu"
     className="hover:text-[#b41712] font-medium text-[#333]"

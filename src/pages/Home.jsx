@@ -10,7 +10,14 @@ import ellipse from '../assets/images/ellipse.png'
 import ProductsList from '../components/UI/ProductsList';
 import products from '../assets/data/products'
 
+
+import AuctionCard from '../components/UI/AuctionCard';
+import {useFirestore} from'../hooks/useFirestore'
+
 const Home = () => {
+
+  const { docs } = useFirestore('auctions');
+
 
 const [data,setData] =useState(products)
 
@@ -65,6 +72,11 @@ useEffect(() =>{
                   <i class="ri-pulse-line"></i></span>
                 </Col>
                 <ProductsList data={data}/>
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {docs.map((doc) => {
+              return <AuctionCard item={doc} key={doc.id} />;
+            })}
+          </div>
             </Row> 
         </Container>
         

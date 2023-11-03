@@ -11,7 +11,7 @@ const ProductsCard = ({ item }) => {
       <div className="p-4 bg-[#fff] rounded-tr-[30px] rounded-bl-[30px] shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] m-1">
         <motion.img
           whileHover={{ scale: 1.1 }}
-          src={item.imgUrl} // Sử dụng productImg nếu không có item.imgUrl
+          src={item.imgUrl} 
           alt={item.productName}
           className="aspect-[264/180] w-full rounded-tr-[30px] rounded-bl-[30px]"
         />
