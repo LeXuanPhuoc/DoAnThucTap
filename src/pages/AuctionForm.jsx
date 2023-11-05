@@ -1,146 +1,26 @@
-// import React, { useState } from 'react';
-
-// const AuctionForm = () => {
-//   const [auctionTitle, setAuctionTitle] = useState(''); 
-//   const [auctionProduct, setAuctionProduct] = useState('');
-//   const [auctionStartTime, setAuctionStartTime] = useState('');
-//   const [auctionEndTime, setAuctionEndTime] = useState('');
-//   const [startingPrice, setStartingPrice] = useState('');
-//   const [expectedPrice, setExpectedPrice] = useState('');
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     // Thực hiện xử lý dữ liệu nhập vào ở đây, ví dụ: gửi yêu cầu tạo phiên đấu giá đến server
-
-//     // Reset các trường sau khi gửi thành công
-//     setAuctionTitle('');
-//     setAuctionStartTime('');
-//     setAuctionEndTime('');
-//     setStartingPrice('');
-//     setExpectedPrice('');
-//     setAuctionProduct('');
-
-//   };
-
-//   return (
-//     <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
-//       <div className="mb-4">
-//         <label className="font-bold mb-2" htmlFor="auctionTitle">Tiêu đề phiên đấu giá:</label>
-//         <input
-//           className="border border-gray-300 rounded-md py-2 px-3 w-full"
-//           type="text"
-//           id="auctionTitle"
-//           value={auctionTitle}
-//           onChange={(e) => setAuctionTitle(e.target.value)}
-//           required
-//         />
-//       </div>
-
-//       <div className="mb-4">
-//         <label className="font-bold mb-2" htmlFor="auctionProduct">Sản phẩm đấu giá:</label>
-//         <input
-//           className="border border-gray-300 rounded-md py-2 px-3 w-full"
-//           type="text"
-//           id="auctionProduct"
-//           value={auctionProduct}
-//           onChange={(e) => setAuctionProduct(e.target.value)}
-//           required
-//         />
-//       </div>
-
-//       <div className="mb-4">
-//         <label className="font-bold mb-2" htmlFor="auctionImage">Ảnh Sản phẩm:</label>
-//         <img
-//           className="border border-gray-300 rounded-md mb-2"
-//           src="path_to_image.jpg"
-//           alt="Product Image"
-//         />
-//         <input
-//           className="border border-gray-300 rounded-md py-2 px-3 w-full"
-//           type="file"
-//           id="auctionImage"
-//           accept="image/*"
-//           // onChange handler để xử lý tải lên ảnh
-//         />
-//       </div>
-//       <div className="mb-4">
-//         <label className="font-bold mb-2" htmlFor="auctionStartTime">Thời gian bắt đầu:</label>
-//         <input
-//           className="border border-gray-300 rounded-md py-2 px-3 w-full"
-//           type="datetime-local"
-//           id="auctionStartTime"
-//           value={auctionStartTime}
-//           onChange={(e) => setAuctionStartTime(e.target.value)}
-//           required
-//         />
-//       </div>
-//       <div className="mb-4">
-//         <label className="font-bold mb-2" htmlFor="auctionEndTime">Thời gian kết thúc:</label>
-//         <input
-//           className="border border-gray-300 rounded-md py-2 px-3 w-full"
-//           type="datetime-local"
-//           id="auctionEndTime"
-//           value={auctionEndTime}
-//           onChange={(e) => setAuctionEndTime(e.target.value)}
-//           required
-//         />
-//       </div>
-//       <div className="mb-4">
-//         <label className="font-bold mb-2" htmlFor="startingPrice">Giá khởi điểm:</label>
-//         <input
-//           className="border border-gray-300 rounded-md py-2 px-3 w-full"
-//           type="number"
-//           id="startingPrice"
-//           value={startingPrice}
-//           onChange={(e) => setStartingPrice(e.target.value)}
-//           required
-//         />
-//       </div>
-//       <div className="mb-4">
-//         <label className="font-bold mb-2" htmlFor="expectedPrice">Giá mong đợi:</label>
-//         <input
-//           className="border border-gray-300 rounded-md py-2 px-3 w-full"
-//           type="number"
-//           id="expectedPrice"
-//           value={expectedPrice}
-//           onChange={(e) => setExpectedPrice(e.target.value)}
-//           required
-//         />
-//         </div>
-      
-
-//       <button className="bg-[#b41712] hover:bg-[#d85952] text-white font-bold py-2 px-4 rounded" type="submit">Tạo phiên đấu giá</button>
-//     </form>
-//   );
-// };
-
-// export default AuctionForm;
-
-
-
 import { Button, Form, Modal, Alert, Row, Col } from 'react-bootstrap';
 import React, { useContext, useRef, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 import { firestoreApp } from '../config/firebase.js';
+import { getDocs, query, orderBy, limit } from 'firebase/firestore';
 
-export const AuctionForm = ({ setAuction }) => {
-  const [showForm, setShowForm] = useState(false); // State để kiểm soát hiển thị form
-  const [error, setError] = useState(''); // State để hiển thị thông báo lỗi
+export const AuctionForm = ({ setAuction ,onCreateSuccess }) => {
+  const [showForm, setShowForm] = useState(false);
+  const [error, setError] = useState('');
 
-  const itemTitle = useRef(); // Biến tham chiếu cho trường nhập liệu "Item Title"
-  const itemDesc = useRef(); // Biến tham chiếu cho trường nhập liệu "Item Description"
-  const startPrice = useRef(); // Biến tham chiếu cho trường nhập liệu "Start Price"
-  const itemDuration = useRef(); // Biến tham chiếu cho trường nhập liệu "Item Duration"
-  const itemImage = useRef(); // Biến tham chiếu cho trường nhập liệu "Item Image"
+  const itemTitle = useRef();
+  const itemDesc = useRef();
+  const startPrice = useRef();
+  const itemDuration = useRef();
+  const itemImage = useRef();
 
-  const { currentUser } = useContext(AuthContext); // Lấy thông tin người dùng hiện tại từ context
+  const { currentUser } = useContext(AuthContext);
 
-  const openForm = () => setShowForm(true); // Hàm để mở form
-  const closeForm = () => setShowForm(false); // Hàm để đóng form
+  const openForm = () => setShowForm(true);
+  const closeForm = () => setShowForm(false);
 
-  const imgTypes = ['image/png', 'image/jpeg', 'image/jpg']; // Mảng chứa các kiểu dữ liệu hợp lệ cho hình ảnh
+  const imgTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
   const convertToURL = (file) => {
     return new Promise((resolve, reject) => {
@@ -154,43 +34,43 @@ export const AuctionForm = ({ setAuction }) => {
       reader.readAsDataURL(file);
     });
   };
-  
+
   const submitForm = async (e) => {
     e.preventDefault();
     setError('');
 
-    // Kiểm tra kiểu dữ liệu của hình ảnh
     if (!imgTypes.includes(itemImage.current.files[0].type)) {
       return setError('Please use a valid image');
     }
 
-    let currentDate = new Date();
-    let dueDate = currentDate.setHours(
-      currentDate.getHours() + itemDuration.current.value
-    );
-
-    // Tạo đối tượng mới để đại diện cho phiên đấu giá
-    let newAuction = {
-      email: currentUser.email, // Email của người đăng phiên đấu giá
-      title: itemTitle.current.value, // Tiêu đề của phiên đấu giá
-      desc: itemDesc.current.value, // Mô tả của phiên đấu giá
-      curPrice: startPrice.current.value, // Giá khởi điểm của phiên đấu giá
-      duration: dueDate, // Thời gian kết thúc của phiên đấu giá
-    };
-    closeForm();
-   
     try {
-      // Convert the image file to base64 string
+      
+      
+
+      let currentDate = new Date();
+      let dueDate = currentDate.setHours(
+        currentDate.getHours() + itemDuration.current.value
+      );
+
+      let newAuction = {
+        email: currentUser.email,
+        title: itemTitle.current.value,
+        desc: itemDesc.current.value,
+        startPrice: startPrice.current.value,
+        duration: dueDate,
+      };
+      closeForm();
+
       const imageFile = itemImage.current.files[0];
       const imageURL = await convertToURL(imageFile);
 
-      // Add the base64 image to the new auction object
-      newAuction.itemImage = imageURL;
       
-      // Upload the new auction data to Firestore
-      const docRef = await addDoc(collection(firestoreApp, 'auctions'), newAuction);
-      console.log('Document written with ID: ', docRef.id);
-      setAuction(newAuction); // Gọi callback function để thực hiện hành động tiếp theo với đối tượng đấu giá
+      newAuction.itemImage = imageURL;
+
+      
+      const auctionRef = doc(collection(firestoreApp, 'auctions'), );
+      await setDoc(auctionRef, newAuction);
+      setAuction(newAuction);
       closeForm();
     } catch (error) {
       console.error('Error adding document: ', error);
@@ -198,19 +78,6 @@ export const AuctionForm = ({ setAuction }) => {
     }
   };
 
-
-  // Function to convert a File object to base64 string
-  const convertToBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-    
-  };
-
-  // ...
 
   return (
     <>
@@ -300,8 +167,3 @@ export const AuctionForm = ({ setAuction }) => {
   );
 };
 export default AuctionForm;
-
-
-
-
-

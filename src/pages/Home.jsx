@@ -15,6 +15,8 @@ import AuctionCard from '../components/UI/AuctionCard';
 import {useFirestore} from'../hooks/useFirestore'
 
 const Home = () => {
+  
+
 
   const { docs } = useFirestore('auctions');
 
@@ -70,13 +72,14 @@ useEffect(() =>{
                 <h2 className='font-[600]	'>Phiên đấu giá đáng chú ý</h2>
                 <span className='text-[#b41712] text-[30px]'>
                   <i class="ri-pulse-line"></i></span>
+                  
                 </Col>
-                <ProductsList data={data}/>
-                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {docs.map((doc) => {
+                {/* <ProductsList data={data}/> */}
+                
+                {docs.map((doc) => {
               return <AuctionCard item={doc} key={doc.id} />;
             })}
-          </div>
+          
             </Row> 
         </Container>
         

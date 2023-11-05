@@ -31,7 +31,21 @@ const ProductsCard = ({ item }) => {
           </Link>
         </div>
       </div>
+
+
+
+
+
+
+
+
+
     </Col>
+
+
+
+
+
   );
 };
 

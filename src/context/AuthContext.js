@@ -20,12 +20,12 @@ export const AuthProvider = ({ children }) => {
     return authApp.signOut();
   };
 
-  const bidAuction = (auctionId, price) => {
+  const bidAuction = (auctionId,Price) => {
     if (!currentUser) {
       return setGlobalMsg('Please login first');
     }
 
-    let newPrice = Math.floor((price / 100) * 110);
+    let newPrice = Math.floor((Price / 100) * 110);
     const db = firestoreApp.collection('auctions');
 
     return db.doc(auctionId).update({

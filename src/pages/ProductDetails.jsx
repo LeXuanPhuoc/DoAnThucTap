@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import Helmet from '../components/Helmet/Helmet';
 import { Container, Row, Col } from 'reactstrap';
