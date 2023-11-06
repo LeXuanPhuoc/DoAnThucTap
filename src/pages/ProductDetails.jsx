@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Helmet from '../components/Helmet/Helmet';
 import { Container, Row, Col } from 'reactstrap';
 import products from '../assets/data/products';
 import { useParams } from 'react-router-dom';
@@ -31,7 +30,7 @@ const ProductDetails = () => {
   const relateProduct = products.filter((item)=> item.catrgory===catrgory);
   
   return (
-    <Helmet title={productName}>
+   
       <section>
         <Container className='px-10'>
           <Row className='pt-3 pb-3'>
@@ -74,7 +73,7 @@ const ProductDetails = () => {
           </Row>
         </Container>
       </section>
-    </Helmet>
+    
   );
 };
 

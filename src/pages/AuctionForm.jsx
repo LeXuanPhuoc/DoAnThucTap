@@ -3,7 +3,6 @@ import React, { useContext, useRef, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { collection, addDoc, doc, setDoc } from 'firebase/firestore';
 import { firestoreApp } from '../config/firebase.js';
-import { getDocs, query, orderBy, limit } from 'firebase/firestore';
 
 export const AuctionForm = ({ setAuction ,onCreateSuccess }) => {
   const [showForm, setShowForm] = useState(false);
@@ -97,7 +96,8 @@ export const AuctionForm = ({ setAuction ,onCreateSuccess }) => {
               <Col>
                 <Form.Group>
                   <Form.Label>Item Title</Form.Label>
-                  <Form.Control type="text" required ref={itemTitle} />
+                  <Form.Control type="text" required ref={itemTitle} placeholder='
+                  ' />
                 </Form.Group>
               </Col>
               <Col>

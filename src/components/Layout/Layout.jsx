@@ -2,6 +2,9 @@ import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Routers from '../../routers/Routers';
+import { AuthProvider } from '../../context/AuthContext';
+
+
 
 
 const Layout = () => {
@@ -9,9 +12,10 @@ const Layout = () => {
   return (
     <>
       <Header />
-      <div>
+      <AuthProvider> <div>
         <Routers />
-      </div>
+      </div></AuthProvider>
+     
       <Footer />
       
     </>

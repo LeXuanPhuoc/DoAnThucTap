@@ -15,6 +15,7 @@ const renderer = ({ completed, props }) => {
     // Nếu countdown đã kết thúc, không hiển thị gì
     return null;
   }
+  console.log();
   return (
    
 <Col lg="3" md="4">
