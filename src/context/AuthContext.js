@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const bidAuction = (auctionId,Price) => {
     if (!currentUser) {
-      return setGlobalMsg('Please login first');
+      return setGlobalMsg('Vui lòng đăng nhập để tham gia đấu giá!');
     }
 
     let newPrice = Math.floor((Price / 100) * 110);
