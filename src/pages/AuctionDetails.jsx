@@ -147,6 +147,7 @@ import { AuthContext } from '../context/AuthContext.js';
 const AuctionDetail = () => {
   const { id } = useParams();
   const [item, setItem] = useState(null);
+  // const [bidders, setBidders] = useState([]);
       
       const { currentUser, bidAuction, endAuction,globalMsg } = useContext(AuthContext);
   const navigate = useNavigate(); 
@@ -181,6 +182,18 @@ const AuctionDetail = () => {
     // Chuyển về trang chủ
     navigate('/home');
   };
+  // const handleBidAuction = () => {
+  //   // Gọi hàm bidAuction để đấu giá
+  //   bidAuction(id, item.startPrice);
+  //   // Thêm thông tin người đấu giá vào danh sách bidders
+  //   const newBidder = {
+  //     // Thông tin người đấu giá, ví dụ:
+  //     name: currentUser.name,
+  //     email: currentUser.email,
+  //     bidPrice: item.curPrice,
+  //   };
+  //   setBidders(prevBidders => [...prevBidders, newBidder]);
+  // };
 
   if (!item) {
     return <p>Loading...</p>;
@@ -233,7 +246,7 @@ const AuctionDetail = () => {
               // Ngược lại, hiển thị nút "Đấu giá"
               <button
                 onClick={() =>
-                  bidAuction(id,item.startPrice)
+                  bidAuction(id,item.curPrice)
                 }
                 className=" bg-blue-200 hover:bg-[#b41712] text-[#333] font-bold  px-3 h-10 rounded-full shadow-lg shadow-neutral-950 hover:text-white transform transition-all duration-500 ease-in-out hover:scale-110 hover:brightness-110 hover:animate-pulse active:animate-bounce "
               >
@@ -244,7 +257,8 @@ const AuctionDetail = () => {
               <span className=" text-[18px] font-[700] mt-4 text-[#a42222] ml-2">
             {/* giá khởi điểm: { item.price}vnđ */}giá hiện tại: ${item.curPrice}
           </span>
-          <div class=" property-info bg-white  p-3 rounded mb-4 ">
+          <div className='flex '>
+          <div class=" property-info bg-white  p-3 rounded mb-4 shadow-sm ">
  <h2 class="text-2xl font-bold mb-4">Thông tin tài sản</h2>
  {/* <p><span class="label font-bold">Mã tài sản:</span> MTS-PLVPSQ</p> */}
  {/* <p><span class="label font-bold">Thời gian mở đăng ký:</span> 06/10/2023 08:00:00</p>
@@ -258,7 +272,18 @@ const AuctionDetail = () => {
   <p><span class="label font-bold">Thời gian bắt đầu trả giá:</span> 19/10/2023 09:00:00</p>
   <p><span class="label font-bold">Mô tả sản phẩm:</span> {item.desc}</p>
  </div>
-          </Col>
+ </div>
+ 
+ {/* {bidders.map((bidder, index) => (
+  <div key={index} className="property-info bg-white p-3 rounded mb-4 shadow-sm w-[400px]">
+    <h2 className="text-2xl font-bold mb-4">Lịch sử đặt giá:</h2>
+    <pre>
+      Users: {bidder.email} || Giá thầu: {bidder.curPrice}
+    </pre>
+  </div>
+  
+))}</div> */}
+  </Col>
         </Row>
       </Container>
     </section>

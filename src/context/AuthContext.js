@@ -20,19 +20,50 @@ export const AuthProvider = ({ children }) => {
     return authApp.signOut();
   };
 
-  const bidAuction = (auctionId,Price) => {
-    if (!currentUser) {
-      return setGlobalMsg('Vui lòng đăng nhập để tham gia đấu giá!');
-    }
+    // const bidAuction = (auctionId,Price) => {
+    //   if (!currentUser) {
+    //     return setGlobalMsg('Vui lòng đăng nhập để tham gia đấu giá!');
+    //   }
 
-    let newPrice = Math.floor((Price / 100) * 110);
-    const db = firestoreApp.collection('auctions');
+    //   let newPrice = Math.floor((Price / 100) * 110);
+    //   const db = firestoreApp.collection('auctions');
+    //   return db.doc(auctionId).update({
+    //     curPrice: newPrice,
+    //     curWinner: currentUser.email,
+    //   });
+    // };
 
-    return db.doc(auctionId).update({
-      curPrice: newPrice,
-      curWinner: currentUser.email,
-    });
-  };
+    const bidAuction = async (auctionId, Price) => {
+      if (!currentUser) {
+        return setGlobalMsg('Vui lòng đăng nhập để tham gia đấu giá!');
+      }
+    
+      const db = firestoreApp.collection('auctions');
+      const auctionRef = db.doc(auctionId);
+    
+      try {
+        const auctionSnapshot = await auctionRef.get();
+        const currentPrice = auctionSnapshot.data().curPrice;
+        let newPrice = Math.floor((currentPrice / 100) * 110);
+    
+        if (Price > newPrice) {
+          newPrice = Math.floor((Price / 100) * 110);
+        }
+    
+        await auctionRef.update({
+          curPrice: newPrice,
+          curWinner: currentUser.email,
+        });
+    
+        // Thực hiện các hành động khác sau khi đấu giá thành công
+    
+      } catch (error) {
+        console.error('Lỗi khi đấu giá:', error);
+        // Xử lý lỗi nếu cần thiết
+      }
+    };
+
+
 
   const endAuction = (auctionId) => {
     const db = firestoreApp.collection('auctions');
