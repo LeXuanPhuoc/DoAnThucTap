@@ -1,7 +1,6 @@
 import {Routes,Route, Navigate} from 'react-router-dom'
 import {useContext } from 'react';
 import Home from '../pages/Home'
-import ProductDetails from '../pages/ProductDetails'
 import ShopAuction from '../pages/ShopAuction'
 import AuctionForm from '../pages/AuctionForm'
 import Auction from '../pages/Auction'

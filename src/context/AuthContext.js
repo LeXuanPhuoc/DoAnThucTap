@@ -5,6 +5,8 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+
+
   const [loading, setLoading] = useState(true);
   const [globalMsg, setGlobalMsg] = useState('');
 
@@ -20,17 +22,34 @@ export const AuthProvider = ({ children }) => {
     return authApp.signOut();
   };
 
-    // const bidAuction = (auctionId,Price) => {
+
+    // const bidAuction = async (auctionId, Price) => {
     //   if (!currentUser) {
     //     return setGlobalMsg('Vui lòng đăng nhập để tham gia đấu giá!');
     //   }
-
-    //   let newPrice = Math.floor((Price / 100) * 110);
+    
     //   const db = firestoreApp.collection('auctions');
-    //   return db.doc(auctionId).update({
-    //     curPrice: newPrice,
-    //     curWinner: currentUser.email,
-    //   });
+    //   const auctionRef = db.doc(auctionId);
+    
+    //   try {
+    //     const auctionSnapshot = await auctionRef.get();
+    //     const currentPrice = auctionSnapshot.data().curPrice;
+    //     let newPrice = Math.floor((currentPrice / 100) * 110);
+    
+    //     if (Price > newPrice) {
+    //       newPrice = Math.floor((Price / 100) * 110);
+    //     }
+    //     await auctionRef.update({
+    //       curPrice: newPrice,
+    //       curWinner: currentUser.email,
+    //     });
+    
+    //     // Thực hiện các hành động khác sau khi đấu giá thành công
+    
+    //   } catch (error) {
+    //     console.error('Lỗi khi đấu giá:', error);
+    //     // Xử lý lỗi nếu cần thiết
+    //   }
     // };
 
     const bidAuction = async (auctionId, Price) => {
@@ -50,18 +69,38 @@ export const AuthProvider = ({ children }) => {
           newPrice = Math.floor((Price / 100) * 110);
         }
     
+        if (newPrice && currentUser) {
+          try {
+            const auctionHistoryRef = auctionRef.collection('auctionHistory');
+            const newBid = {
+              bidder: currentUser.email,
+              bidPrice: newPrice,
+              timestamp: new Date(),
+            };
+    
+            await auctionHistoryRef.add(newBid);
+            await auctionRef.update({ curPrice: newBid.bidPrice });
+          } catch (error) {
+            console.error('Lỗi khi lấy dữ liệu đấu giá:', error);
+            // Handle error if necessary
+          }
+        }
+    
         await auctionRef.update({
           curPrice: newPrice,
           curWinner: currentUser.email,
         });
     
-        // Thực hiện các hành động khác sau khi đấu giá thành công
+        // Perform other actions after successful bidding
     
       } catch (error) {
         console.error('Lỗi khi đấu giá:', error);
-        // Xử lý lỗi nếu cần thiết
+        // Handle error if necessary
       }
     };
+
+
+    
 
 
 

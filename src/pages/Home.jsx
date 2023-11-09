@@ -5,12 +5,6 @@ import banner from '../assets/images/banner.png'
 import { Container, Row, Col, Button } from 'reactstrap';
 import ellipse from '../assets/images/ellipse.png'
 
-
- 
-import ProductsList from '../components/UI/ProductsList';
-import products from '../assets/data/products'
-
-
 import AuctionCard from '../components/UI/AuctionCard';
 import {useFirestore} from'../hooks/useFirestore'
 
@@ -19,18 +13,6 @@ const Home = () => {
 
 
   const { docs } = useFirestore('auctions');
-
-
-const [data,setData] =useState(products)
-
-useEffect(() =>{
-  const filteredProduct = products.filter(item=>item.category ==="car");
-  setData(filteredProduct)
-
-},[]);
-
-
-
 
 
   return (<Helmet title={'home'}>
