@@ -22,10 +22,6 @@ export const Register = () => {
       return setError('Passwords does not match');
     }
 
-    console.log(`email is ${emailRef.current.value}`);
-    console.log(`passwordRef is ${passwordRef.current.value}`);
-    console.log(`cmfPasswordRef is ${cmfPasswordRef.current.value}`);
-
     try {
       await register(emailRef.current.value, passwordRef.current.value);
       closeForm();

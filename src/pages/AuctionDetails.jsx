@@ -171,6 +171,7 @@ const AuctionDetail = () => {
         const doc = await auctionRef.get();
         if (doc.exists) {
           setItem(doc.data());
+          
         } else {
           console.log('Không tìm thấy đấu giá');
         }
@@ -183,6 +184,7 @@ const AuctionDetail = () => {
     
 
   }, [id,item]);
+  
   const handleEndAuction = () => {
     const confirm = window.confirm('Bạn có chắc chắn muốn Hủy đấu giá?');
     if (confirm) {
@@ -195,7 +197,7 @@ const AuctionDetail = () => {
     // Chuyển về trang chủ
     navigate('/home');
   };
-
+ 
   if (!item) {
     return <p>Loading...</p>;
   }
@@ -249,7 +251,7 @@ const AuctionDetail = () => {
                 onClick={() =>
                 bidAuction(id,item.curPrice)
                 }
-                className=" bg-blue-200 hover:bg-[#b41712] text-[#333] font-bold  px-3 h-10 rounded-full shadow-lg shadow-neutral-950 hover:text-white transform transition-all duration-500 ease-in-out hover:scale-110 hover:brightness-110 hover:animate-pulse active:animate-bounce "
+                className=" bg-blue-200 hover:bg-[rgb(180,23,18)] text-[#333] font-bold  px-3 h-10 rounded-full shadow-lg shadow-neutral-950 hover:text-white transform transition-all duration-500 ease-in-out hover:scale-110 hover:brightness-110 hover:animate-pulse active:animate-bounce "
               >
                 Đấu giá
               </button>
