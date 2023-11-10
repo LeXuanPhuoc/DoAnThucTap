@@ -47,7 +47,7 @@ function Header() {
     Tài sản đấu giá
   </NavLink>
   <NavLink
-    to="/cuoc-dau-gia"
+    to="/auctionDetails"
     className="hover:text-[#b41712] font-medium text-[#333]"
     activeClassName="text-[#b41712]"
   >
