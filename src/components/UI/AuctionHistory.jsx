@@ -23,14 +23,14 @@ const AuctionHistory = ({ auctionId }) => {
   }, [auctionId,auctionHistory]);
   return (
     <div className=" ">
-      <h2 class="text-2xl font-bold mb-4">lịch sử bước nhảy giá: </h2>
+      <h2 class="text-2xl font-bold ">lịch sử bước nhảy giá: </h2>
       <div className="border border-gray-300 rounded-md w-[500px]">
         <div className="flex bg-gray-200 text-gray-800 font-semibold p-2">
           <div className="w-1/3">Mức giá</div>
           <div className="w-1/3">Tên</div>
           <div className="w-1/3">Thời gian</div>
         </div>
-        <ul className='h-[300px] overflow-y-auto'>
+        <ul className='h-[250px] overflow-y-auto'>
           {auctionHistory.map((history, index) => (
             <li key={index} className="flex p-2 border-b border-gray-300">
               <div className="w-1/3">$ {history.bidPrice}</div>

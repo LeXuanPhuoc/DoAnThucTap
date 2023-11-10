@@ -39,7 +39,7 @@ export const AuctionForm = ({ setAuction ,onCreateSuccess }) => {
     setError('');
 
     if (!imgTypes.includes(itemImage.current.files[0].type)) {
-      return setError('Please use a valid image');
+      return setError('Vui lòng sử dụng hình ảnh hợp lệ');
     }
 
     try {

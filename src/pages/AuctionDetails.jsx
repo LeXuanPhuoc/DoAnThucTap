@@ -239,7 +239,7 @@ const AuctionDetail = () => {
                 className=" bg-blue-200 hover:bg-[#b41712] text-[#333] font-bold  px-3 h-10 rounded-full shadow-lg shadow-neutral-950 hover:text-white transform transition-all duration-500 ease-in-out hover:scale-110 hover:brightness-110 hover:animate-pulse active:animate-bounce "
              
               >
-                Kết thúc đấu giá
+                Hủy đấu giá
               </button>
             ) : currentUser.email === item.curWinner ? (
               // Nếu người dùng hiện tại là người giữ giá cao nhất, hiển thị thông báo "Người thắng"

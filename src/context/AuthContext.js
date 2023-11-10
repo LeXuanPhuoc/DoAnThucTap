@@ -38,25 +38,25 @@ export const AuthProvider = ({ children }) => {
         let newPrice = Math.floor((price / 100) * 110);
     
         if (price > newPrice) {
-          newPrice = Math.floor((price / 100) * 110);
+          newPrice = Math.floor((currentPrice / 100) * 110);
         }
     
-        if (newPrice && currentUser) {
-          try {
-            const auctionHistoryRef = auctionRef.collection('auctionHistory');
-            const newBid = {
-              bidder: currentUser.email,
-              bidPrice: newPrice,
-              timestamp: new Date(),
-            };
+        // if (newPrice && currentUser) {
+        //   try {
+        //     const auctionHistoryRef = auctionRef.collection('auctionHistory');
+        //     const newBid = {
+        //       bidder: currentUser.email,
+        //       bidPrice: newPrice,
+        //       timestamp: new Date(),
+        //     };
     
-            await auctionHistoryRef.add(newBid);
-            await auctionRef.update({ curPrice: newBid.bidPrice });
-          } catch (error) {
-            console.error('Lỗi khi lấy dữ liệu đấu giá:', error);
-            // Handle error if necessary
-          }
-        }
+        //     await auctionHistoryRef.add(newBid);
+        //     await auctionRef.update({ curPrice: newBid.bidPrice });
+        //   } catch (error) {
+        //     console.error('Lỗi khi lấy dữ liệu đấu giá:', error);
+        //     // Handle error if necessary
+        //   }
+        // }
     
         await auctionRef.update({
           curPrice: newPrice,
