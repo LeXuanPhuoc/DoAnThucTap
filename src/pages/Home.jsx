@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import Helmet from '../components/Helmet/Helmet'
 import '../Style/Home.css'
 import banner from '../assets/images/banner.png'
@@ -7,12 +7,15 @@ import ellipse from '../assets/images/ellipse.png'
 
 import AuctionCard from '../components/UI/AuctionCard';
 import {useFirestore} from'../hooks/useFirestore'
+import { AuthContext } from '../context/AuthContext.js';
+
 
 const Home = () => {
   
 
 
   const { docs } = useFirestore('auctions');
+  const { currentUser} = useContext(AuthContext);
 
 
   return (<Helmet title={'home'}>
@@ -58,9 +61,22 @@ const Home = () => {
                 </Col>
                 {/* <ProductsList data={data}/> */}
                 
-                {docs.map((doc) => {
+                {/* {docs.map((doc) => {
               return <AuctionCard item={doc} key={doc.id} />;
-            })}
+            })} */}
+
+{docs.map((doc) => {
+  if (currentUser && currentUser.email === doc.email) {
+    // Không hiển thị nếu người dùng đã đăng nhập và email trùng khớp
+    return null;
+  } else {
+    // Hiển thị phiên đấu giá cho người dùng chưa đăng nhập và các phiên đấu giá khác
+    return <AuctionCard item={doc} key={doc.id} />;
+  }
+})}
+
+
+
           
             </Row> 
         </Container>

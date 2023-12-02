@@ -154,10 +154,10 @@ export const AuctionForm = ({ setAuction ,onCreateSuccess }) => {
             </Row>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={closeForm}>
+            <Button className='bg-gray-500 hover:bg-red-500 border-0'  onClick={closeForm}>
               Cancel
             </Button>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" className='bg-blue-500' type="submit">
               Submit
             </Button>
           </Modal.Footer>
